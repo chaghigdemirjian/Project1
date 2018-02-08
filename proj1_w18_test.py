@@ -3,6 +3,8 @@ import proj1_w18 as proj1
 import json
 import requests
 
+#again,opening up our json file to test a local sample of data that is saved
+#in our repository
 
 json_sample = open('sample_json.json', 'r')
 json_sample_data = json_sample.read()
@@ -10,6 +12,9 @@ sample_results_list = json.loads(json_sample_data)
 json_sample.close()
 
 class TestClasses(unittest.TestCase):
+
+#init test code essentially checks that each iten in a class has the instance
+#variables it's supposed to have and that default parameters are working fine
 
     def test_init(self):
         m1 = proj1.Media()
@@ -49,6 +54,7 @@ class TestClasses(unittest.TestCase):
         self.assertEqual(hasattr(m6, "genre"), False)
         self.assertEqual(hasattr(m5, "track_length"), False)
 
+
     def test_str(self):
         m1 = proj1.Media("Starboy", "The Weeknd", "2016")
         m2 = proj1.Media()
@@ -83,6 +89,10 @@ class TestClasses(unittest.TestCase):
 
         self.assertEqual(m3.__len__(), 102)
 
+#this code allows us to do the same as above, but instead of working with
+#user inputted variables, we are extracting results from a json file
+#which in this case is the sample json file
+
     def test_JSON(self):
         m1 = proj1.Media(json_dict = sample_results_list[2])
 
@@ -114,45 +124,35 @@ class TestClasses(unittest.TestCase):
         self.assertEqual(m3.__str__(), "Jaws by Steven Spielberg (1975) [PG]")
         self.assertEqual(m3.__len__(), 124)
 
-    def test_getItunesData(self): #need to fix teh tests
-        # m1 = proj1.get_itunes_data(search_term ="")
-        # self.assertEqual(len(m1), 0)
-        #
-        #
-        # m2 = proj1.get_itunes_data(search_term = "love")
-        # bool_result = len(m2) <= 50
-        # self.assertEqual(bool_result, True)
-        #
-        # m3 = proj1.get_itunes_data(search_term = "baby")
-        # bool_result = len(m3) <= 50
-        # self.assertEqual(bool_result, True)
-        #
-        # m4 = proj1.get_itunes_data(search_term = "")
-        # bool_result = len(m4) <= 50
-        # self.assertEqual(bool_result, True)
-        #
-        # m5 = proj1.get_itunes_data(search_term ="##!!")
-        # self.assertEqual(len(m5), 0)
-        #
-        # m6 = proj1.get_itunes_data(search_term = "moana")
-        # bool_result = len(m6) <= 50
-        # self.assertEqual(bool_result, True)
-        #
-        # m7 = proj1.get_itunes_data(search_term = "helter skelter")
-        # bool_result = len(m7) <= 50
-        # self.assertEqual(bool_result, True)
-        #
-        # m8 = proj1.get_itunes_data(search_term = "demirjian")
-        # bool_result = len(m8) <= 50
-        # self.assertEqual(bool_result, True)
-        #
-        # m9 = proj1.get_itunes_data(search_term = "palig")
-        # bool_result = len(m8) <= 50
-        # self.assertEqual(bool_result, True)
-        #
-        # m10 = proj1.get_itunes_data(search_term = "Shaghig")
-        # bool_result = len(m8) <= 50
-        # self.assertEqual(bool_result, True)
-        #
+#this allows us to check that the results we're getting are the right length
+#the default length of results is 50, so we're making sure theres no results above that
+#also checks that queries that should be invalid and not return results are working properly 
+    def test_getItunesData(self):
+        m1 = proj1.get_itunes_data(search_term ="")
+        self.assertEqual(len(m1), 0)
+
+        m2 = proj1.get_itunes_data(search_term = "love")
+        self.assertEqual(len(m2) <= 50, True)
+
+        m3 = proj1.get_itunes_data(search_term = "baby")
+        self.assertEqual(len(m3) <= 50, True)
+
+        m4 = proj1.get_itunes_data(search_term = "")
+        self.assertEqual(len(m4) <= 50, True)
+
+        m5 = proj1.get_itunes_data(search_term ="##!!")
+        self.assertEqual(len(m5), 0)
+
+        m6 = proj1.get_itunes_data(search_term = "moana")
+        self.assertEqual(len(m6) <= 50, True)
+
+        m7 = proj1.get_itunes_data(search_term = "helter skelter")
+        self.assertEqual(len(m7) <= 50, True)
+
+        m8 = proj1.get_itunes_data(search_term = "demirjian")
+        self.assertEqual(len(m8) <= 50, True)
+
+        m9 = proj1.get_itunes_data(search_term = "palig")
+        self.assertEqual(len(m9) <= 50, True)
 
 unittest.main()
