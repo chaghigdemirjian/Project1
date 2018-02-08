@@ -116,7 +116,7 @@ def get_itunes_data(search_term):
 if __name__ == "__main__":
 
 	search_term = input(" Enter a search term, or exit")
-	if search_term == "exit":
+	if search_term.lower() == "exit":
 		print("Peace out. Come again.")
 		exit()
 
@@ -124,7 +124,7 @@ if __name__ == "__main__":
 #in until we have actually made a request for data from itunes
 
 	elif search_term.isdigit():
-		search_term = input("You cannot enter an integer at this point. Please re-run the program")
+		print("You cannot enter an integer at this point. Please re-run the program")
 		print("Peace out. Come again.")
 		exit()
 
@@ -136,8 +136,9 @@ if __name__ == "__main__":
 
 			if search_term.isdigit():
 				print("Launching")
-				webbrowser.open(urls[int(search_term)])
+				print(urls[int(search_term)])
 				print("In web browser...")
+				webbrowser.open(urls[int(search_term)])
 
 #if the user doesnt input anything or inputs a query with no results. Then they
 #are prompted to enter another search
@@ -189,7 +190,7 @@ if __name__ == "__main__":
 					urls.update({count:media.url})
 					print(count, media.__str__())
 					count += 1
-			search_term = input("Enter a number for more info, or another search term, or exit")
+			search_term = input('Enter a number for more info about a specific song, movie or media item, or another search term, or "exit" to quit')
 	print("Peace out. Come again.")
 
 	pass

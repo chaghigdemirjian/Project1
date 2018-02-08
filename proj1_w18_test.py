@@ -70,8 +70,6 @@ class TestClasses(unittest.TestCase):
         m4 = proj1.Movie("A Walk to Remember", "Nicholas Sparks", "2002",
         "PG", 6130000)
 
-        m4_str_return = "A Walk to Remember by Nicholas Sparks (2002) [PG]"
-
         self.assertEqual(m4.__str__(), "A Walk to Remember by Nicholas Sparks (2002) [PG]")
 
     def test_len(self):
@@ -126,7 +124,7 @@ class TestClasses(unittest.TestCase):
 
 #this allows us to check that the results we're getting are the right length
 #the default length of results is 50, so we're making sure theres no results above that
-#also checks that queries that should be invalid and not return results are working properly 
+#also checks that queries that should be invalid and not return results are working properly
     def test_getItunesData(self):
         m1 = proj1.get_itunes_data(search_term ="")
         self.assertEqual(len(m1), 0)
